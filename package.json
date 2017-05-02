@@ -1,0 +1,18 @@
+{
+  "name": "leetcode-javascript",
+  "version": "1.0.0",
+  "description": "Yvshuo's LeetCode solutions by JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && mocha",
+    "lint": "eslint . && echo 'ESLint Passed.'\n"
+  },
+  "author": "yvshuo <cuc_yushuo@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^3.1.0",
+    "glob": "^5.0.5",
+    "mocha": "^2.2.4"
+  }
+}
