@@ -12,11 +12,18 @@ problems.forEach(function (dirPath) {
   var programPath = path.join(dirPath, 'index.js');
   var program = require(programPath);
   var testcases = require(testcasesPath);
-  describe(dirName, function () {
-    it('testcases should passed', function () {
-      testcases.forEach(function (testcase) {
-        assert.deepEqual(program.apply(null, testcase.input), testcase.output);
+
+  if (typeof program === 'object') {
+    Object.keys(program).forEach(function (key) {
+      describe(dirName + ' : ' + key, function () {
+        it('testcases should passed', function () {
+          testcases.forEach(function (testcase) {
+            console.log('      ' + testcase.input + ' -> ' +
+              program[key].apply(null, testcase.input) + ' vs ' + testcase.output);
+            assert.deepEqual(program[key].apply(null, testcase.input), testcase.output);
+          });
+        });
       });
     });
-  });
+  }
 });

@@ -13,12 +13,13 @@
 
 /**
  * 使用hash表存储每个数对应的下标
+ * 注意题目默认只有一个解，不考虑多个解的情况
  * 
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = module.exports = function (nums, target) {
+exports.twoSum = function (nums, target) {
   var hash = new Map();
   for (var i = 0; i < nums.length; i++) {
     var index = hash.get(target - nums[i]);
