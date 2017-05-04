@@ -21,6 +21,9 @@
 exports.threeSum = function (nums) {
   var copyNums = nums.slice(0);
   var result = [];
+  copyNums.sort(function (a, b) {
+    return a - b;
+  });
   for (var i = 0; i < copyNums.length - 2; i++) {
     for (var j = i + 1; j < copyNums.length - 1; j++) {
       // 使用二分查找进行命中查找
@@ -29,16 +32,21 @@ exports.threeSum = function (nums) {
       var target = -copyNums[i] - copyNums[j];
       while (first !== last) {
         var mid = first + Math.floor((last - first) / 2);
-        console.log(i + '-' + j + '-' + mid + ':' + first + '-' + last);
-        if (target > copyNums[mid]) first = ++mid;
+        if (target > copyNums[mid]) first = mid + 1;
         if (target < copyNums[mid]) last = mid;
         if (target === copyNums[mid]) {
-          first = ++mid;
-          console.log([copyNums[i], copyNums[j], target]);
           result.push([copyNums[i], copyNums[j], target]);
+          break;
         }
       }
     }
   }
+  if (result.length === 1) return result;
+  var copyResult = {};
+  result = result.filter(function (a) {
+    if (copyResult[a.toString()]) return false;
+    copyResult[a.toString()] = true;
+    return true;
+  });
   return result;
 };
