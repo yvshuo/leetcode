@@ -19,6 +19,7 @@
 exports.searchRange = function (nums, target) {
   var first = 0;
   var last = nums.length;
+  // 查找左边界
   while (first !== last) {
     var mid = first + Math.floor((last - first) / 2);
     if (target > nums[mid]) first = ++mid;
@@ -26,12 +27,14 @@ exports.searchRange = function (nums, target) {
   }
   var low = first;
   last = nums.length;
+  // 查找右边界
   while (first !== last) {
     var mid2 = first + Math.floor((last - first) / 2);
     if (target >= nums[mid2]) first = ++mid2;
     else last = mid2;
   }
   var high = first;
+  // 未命中的话返回[-1, -1]
   if (nums[low] !== target) return [-1, -1];
   return [low, high - 1];
 };
