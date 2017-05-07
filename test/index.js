@@ -4,7 +4,7 @@ var path = require('path');
 var exec = require('child_process').exec;
 var fs = require('fs');
 
-var problems = glob.sync(path.resolve(__dirname, '../problems/*'));
+var problems = glob.sync(path.resolve(__dirname, '../{problems,algorithm}/*'));
 
 problems.forEach(function (dirPath) {
   var dirName = path.relative(path.resolve(dirPath, '..'), dirPath);

@@ -24,22 +24,17 @@ exports.threeSumClosest = function (nums, target) {
     return a - b;
   });
   for (var i = 0; i < copy.length - 2; i++) {
-    var first = i + 1;
-    var last = copy.length - 1;
-    while (first !== last) {
-      var abs = Math.abs(copy[i] + copy[first] + copy[last] - target);
-      if (abs === 0) {
-        min = 0;
-        result = target;
-        break;
-      }
+    var low = i + 1;
+    var high = copy.length - 1;
+    while (low < high) {
+      var plusRes = copy[i] + copy[low] + copy[high];
+      var abs = Math.abs(plusRes - target);
       if (abs < min) {
         min = abs;
-        result = copy[i] + copy[first] + copy[last];
-        console.log(min + '-' + result);
+        result = plusRes;
       }
-      if (copy[i] + copy[first] + copy[last] - target > 0) first++;
-      if (copy[i] + copy[first] + copy[last] - target < 0) last--;
+      if (plusRes < target) ++low;
+      else --high;
     }
   }
   return result;

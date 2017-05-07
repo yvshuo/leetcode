@@ -17,6 +17,63 @@
 /**
  * 求给定数组中三个数的和为0的集合，结果不能有重复值。
  * 注意对数组进行去重。
+ * 先排序，然后左右夹逼
+ * 
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+exports.threeSum2 = function (nums) {
+  var copyNums = nums.slice(0);
+  var result = [];
+  var target = 0;
+  if (copyNums.length < 3) return result;
+  copyNums.sort(function (a, b) {
+    return a - b;
+  });
+  for (var i = 0; i < copyNums.length - 2; i++) {
+    if (copyNums[i] > target) break;
+    if (i > 0 && copyNums[i] === copyNums[i - 1]) continue;
+    var low = i + 1;
+    var high = copyNums.length - 1;
+    while (low < high) {
+      var plusRes = copyNums[i] + copyNums[low] + copyNums[high];
+      if (plusRes < target) {
+        // 比target值小，提高下界，往上夹逼
+        ++low;
+        // 跳过重复的数
+        while (low < high && copyNums[low] === copyNums[low - 1]) {
+          ++low;
+        }
+        continue;
+      }
+      if (plusRes > target) {
+        // 比target值大，减小上界，往下夹逼
+        --high;
+        // 跳过重复的数
+        while (low < high && copyNums[high] === copyNums[high + 1]) {
+          --high;
+        }
+        continue;
+      }
+      result.push([copyNums[i], copyNums[low], copyNums[high]]);
+      ++low;
+      --high;
+      // 跳过重复的数
+      while (low < high && copyNums[low] === copyNums[low - 1]) {
+        ++low;
+      }
+      // 跳过重复的数
+      while (low < high && copyNums[high] === copyNums[high + 1]) {
+        --high;
+      }
+    }
+  }
+  return result;
+};
+
+/**
+ * 求给定数组中三个数的和为0的集合，结果不能有重复值。
+ * 注意对数组进行去重。
  * 
  * @param {number[]} nums
  * @return {number[][]}
