@@ -1,3 +1,27 @@
+var util = require('../../util');
+
+/**
+ * 输出一组数据中第N小的数
+ * @param {number[]} nums
+ * @param {number} n
+ * @return {number}
+ */
+exports.selectMinN2 = function (nums, n) {
+  var array = nums;
+  var result = [];
+  var hash = {};
+  for (var i = 0; i < array.length; i++) {
+    if (typeof hash[array[i]] === 'undefined') {
+      hash[array[i]] = true;
+      result = result.concat(array[i]);
+    }
+  }
+  result.sort(function (a, b) {
+    return a - b;
+  });
+  return result[n - 1];
+};
+
 /**
  * 输出一组数据中第N小的数
  * @param {number[]} nums
