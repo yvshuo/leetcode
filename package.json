@@ -14,5 +14,8 @@
     "eslint-config-airbnb": "^3.1.0",
     "glob": "^5.0.5",
     "mocha": "^2.2.4"
+  },
+  "dependencies": {
+    "babel-eslint": "^8.2.6"
   }
 }
